@@ -25,15 +25,17 @@ public class TestBase {
                 @Override
                 public void evaluate() throws Throwable {
                     for (int i = 1; ; i++) {
+                        if (i > 1) log.warn("目前执行第{}次", i);
                         try {
                             base.evaluate();
                             break;
                         } catch (Throwable throwable) {
                             //重试限制值
-                            if (i == 3) {
+                            final int repeatTimes = 1;
+                            if (i == repeatTimes) {
                                 throw throwable;
                             }
-                            log.warn("测试失败，重试第{}次", i + 1);
+                            log.warn("测试失败，可以重试{}次", i - 1);
                         }
                     }
                 }

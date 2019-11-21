@@ -24,4 +24,5 @@ public class IndexPage {
         kw.sendKeys(what);
         su.submit();
     }
+
 }

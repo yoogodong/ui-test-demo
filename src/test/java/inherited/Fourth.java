@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  * 1. 采用继承来保证 webdriver 可维护
  * 2. JUnit4 继承的关键问题
  */
-public class FourthTest extends Base {
+public class Fourth extends Base {
 
     @Test
     public void could_navigate_to_zhihu() throws InterruptedException {

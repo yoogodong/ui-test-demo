@@ -66,7 +66,5 @@ public class Base {
             return true;
         });
 
-//        wait.until()
-
     }
 }

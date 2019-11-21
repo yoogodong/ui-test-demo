@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.support.PageFactory;
 
-public class WithPageObjectTest extends Base {
+public class BaiduTest extends Base {
 
     private IndexPage indexPage;
     private SearchResultPage searchResultPage;

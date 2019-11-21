@@ -32,7 +32,7 @@ public class SecondTest {
     public void setUp() throws Exception {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 20);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     }
 
     @After
@@ -45,6 +45,7 @@ public class SecondTest {
     public void could_navigate_to_zhihu() throws InterruptedException {
         driver.get("http://baidu.com");
         driver.findElement(By.id("kw")).sendKeys("香港");
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("su")));
         driver.findElement(By.id("su")).click();
         while (true) {
             List<WebElement> link = driver.findElements(By.partialLinkText("豆瓣同城"));

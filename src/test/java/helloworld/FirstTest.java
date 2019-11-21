@@ -32,7 +32,7 @@ public class FirstTest {
                 ExpectedConditions.not(ExpectedConditions.titleIs("百度一下，你就知道")));
         String title = driver.getTitle();
         assertEquals("香港_百度搜索", title);
-        driver.quit();
+//        driver.quit();
     }
 
 }
