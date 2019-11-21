@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Base {
+public class TestBase {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
     /**
@@ -52,7 +52,7 @@ public class Base {
             log.info("打开浏览器");
             driver = new ChromeDriver();
             wait = new WebDriverWait(driver, 10);
-            Util.implicitWait(driver);
+            WebUtil.implicitWait(driver);
         }
 
         @Override

@@ -1,6 +1,6 @@
 package framework.pageobject.baidu;
 
-import framework.common.Util;
+import framework.common.WebUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,7 +17,7 @@ public class SearchResultPage {
     }
 
     public void nextPage() {
-        Util.push(driver, nextPage, element -> element.click());
+        WebUtil.push(driver, nextPage, WebElement::click);
     }
 
 

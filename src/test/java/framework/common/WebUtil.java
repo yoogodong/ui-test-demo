@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class Util {
+public class WebUtil {
 
-    private static Logger log = LoggerFactory.getLogger(Util.class);
+    private static Logger log = LoggerFactory.getLogger(WebUtil.class);
 
     /**
      * 如何想对元素调用有返回值的方法
