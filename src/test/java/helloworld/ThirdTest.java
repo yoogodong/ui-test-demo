@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -20,13 +21,15 @@ import static org.junit.Assert.assertEquals;
  * 1. 切换到通过链接打开的新窗口
  * 2. findElement/findElements 的区别
  */
-public class SecondTest {
+public class ThirdTest {
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     @Before
     public void setUp() throws Exception {
         driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 20);
     }
 
     @After
@@ -42,7 +45,7 @@ public class SecondTest {
         driver.findElement(By.id("su")).click();
         while (true) {
             driver.navigate().refresh();
-            List<WebElement> link = driver.findElements(By.partialLinkText("豆瓣"));
+            List<WebElement> link = driver.findElements(By.partialLinkText("香港八一"));
             if (link.size() != 0) {
                 new Actions(driver).moveToElement(link.get(0)).click().perform();
                 break;
@@ -55,7 +58,7 @@ public class SecondTest {
         driver.switchTo().window(
                 driver.getWindowHandles().toArray(new String[]{})[0]);
         driver.navigate().refresh();
-        assertEquals("中国香港 (豆瓣)", driver.getTitle());
+        assertEquals("香港八一_百度百科", driver.getTitle());
     }
 
 

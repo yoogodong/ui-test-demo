@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,30 +17,34 @@ public class SearchResultPage extends PageBase {
     private WebElement nextPage;
     private Logger log = LoggerFactory.getLogger(SearchResultPage.class);
 
-
+    /**
+     * 点击下一页，然后刷新 dom
+     */
     public void nextPage() {
         log.info("点击下一页");
-        push(nextPage, WebElement::click);
+        nextPage.click();
+        driver.navigate().refresh();
+
     }
 
-
+    /**
+     * 点击搜索结果页面中的指定关键字的链接
+     */
     public void openLinkWithText(String keyWorlds) {
         while (true) {
             List<WebElement> links = driver.findElements(By.partialLinkText(keyWorlds));
             if (links.size() != 0) {
-                push(links.get(0), element -> new Actions(driver).moveToElement(element).click().perform());
-                links.get(0);
+                //注意这里，直接 webElement.click() 会 因为浏览器滚动条没有在合适的区域而抛出 ElementClickInterceptedException
+                new Actions(driver).moveToElement(links.get(0)).click().perform();
                 break;
             } else {
                 nextPage();
-                driver.navigate().refresh();
             }
         }
     }
 
 
     public String title() {
-        wait.until(ExpectedConditions.not(ExpectedConditions.titleIs("百度一下，你就知道")));
         return driver.getTitle();
     }
 }

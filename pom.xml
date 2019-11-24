@@ -51,8 +51,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <threadCount>5</threadCount>
+                    <threadCount>1</threadCount>
                     <parallel>classesAndMethods</parallel>
+                    <!--每个 cup core X 个线程-->
+                    <perCoreThreadCount>true</perCoreThreadCount>
                 </configuration>
             </plugin>
         </plugins>

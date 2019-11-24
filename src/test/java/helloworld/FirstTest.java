@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  * 1. 启动浏览器
  * 2. 定位元素
  * 3. 与元素交互
- * 4. 如何等待
+ * 4. 什么时候要刷新 dom
  * 5. 验证什么
  */
 public class FirstTest {
@@ -28,8 +26,7 @@ public class FirstTest {
 
         driver.findElement(By.id("su")).click();
 
-        new WebDriverWait(driver, 20).until(
-                ExpectedConditions.not(ExpectedConditions.titleIs("百度一下，你就知道")));
+        driver.navigate().refresh();
         String title = driver.getTitle();
         assertEquals("香港_百度搜索", title);
         driver.quit();

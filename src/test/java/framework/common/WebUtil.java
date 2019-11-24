@@ -4,7 +4,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,53 +13,46 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.concurrent.TimeUnit;
 
+/**
+ * 用来将webdriver 绑定到线程 scope, 以能使 测试基类和页面对象基类共享 webdriver
+ */
 public class WebUtil {
 
     private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
-    private static final ThreadLocal<WebDriverWait> threadWait = new ThreadLocal<>();
     private static Logger log = LoggerFactory.getLogger(WebUtil.class);
 
+
+    /**
+     * 将 webdriver 绑定到线程，如果测试以单线程方式运行，则需要检测 webdriver 是否已经 quit
+     */
     public static WebDriver getWebDriver() {
-        if (threadDriver.get() == null) {
-            threadDriver.set(chrome());
+        if (threadDriver.get() == null || threadDriver.get().toString().contains("null")) {
+            threadDriver.set(chrome());//切换浏览器
         }
         return threadDriver.get();
     }
 
-    //    todo: 不同浏览器的方法
+
     private static WebDriver chrome() {
         System.setProperty("webdriver.chrome.driver", "/Users/ygdong/CommandAlias/chromedriver");
         return new ChromeDriver();
     }
 
-    public static WebDriverWait getWait() {
-        if (threadWait.get() == null) {
-            threadWait.set(new WebDriverWait(getWebDriver(), 20));
-        }
-        return threadWait.get();
+    private static WebDriver ie() {
+        System.setProperty("webdriver.ie.driver", "");
+        return new InternetExplorerDriver();
+    }
+
+    private static WebDriver firfox() {
+        System.setProperty("webdriver.firfox.driver", "");
+        return new ChromeDriver();
     }
 
 
     /**
-     * 设置隐式等待
+     * 获取当前的屏幕快照， 保存在项目目录下的 screenshot 目录下
      */
-    public static void implicitWait() {
-        final int time = 5;
-        final TimeUnit unit = TimeUnit.SECONDS;
-        getWebDriver().manage().timeouts().implicitlyWait(time, unit);
-        log.info("隐式等待设置为 {} {}", time, unit);
-    }
-
-    /**
-     * 取消隐式等待
-     */
-    public static void implicitWait0() {
-        getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        log.info("隐式等待设置为 0 SECONDS");
-    }
-
     public static void takeScreenShot() {
         FileInputStream in = null;
         FileOutputStream out = null;
