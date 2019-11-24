@@ -3,6 +3,7 @@
 
 # Changelog 
 - 2019年11月 建立
+- 2019年11月22日 增加在测试失败后截屏的功能
 
 # 目的：
 - selenium webdriver 的核心

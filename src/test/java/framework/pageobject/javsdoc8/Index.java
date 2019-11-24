@@ -1,22 +1,17 @@
 package framework.pageobject.javsdoc8;
 
-import framework.common.WebUtil;
+import framework.common.PageBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Index {
+public class Index extends PageBase {
 
-    private WebDriver driver;
 
     @FindBy(xpath = "//li[@class='navBarCell1Rev']")
     private WebElement currentNavItem;
 
 
-    public Index(WebDriver driver) {
-        this.driver = driver;
-    }
 
     public void leftTopFrame() {
         driver.switchTo().frame("packageListFrame");
@@ -33,18 +28,18 @@ public class Index {
     public void choosePackage(String s) {
         driver.switchTo().parentFrame();
         leftTopFrame();
-        WebUtil.push(driver, By.linkText(s), WebElement::click);
+        push(By.linkText(s), WebElement::click);
     }
 
     public void chooseClass(String cls) {
         driver.switchTo().parentFrame();
         leftBottomFrame();
-        WebUtil.push(driver, By.linkText(cls), WebElement::click);
+        push(By.linkText(cls), WebElement::click);
     }
 
     public String getCurrentNavItem() {
         driver.switchTo().parentFrame();
         rightFrame();
-        return (String) WebUtil.pull(driver, currentNavItem, WebElement::getText);
+        return (String) pull(currentNavItem, WebElement::getText);
     }
 }

@@ -1,30 +1,36 @@
 package framework.cases;
 
+import framework.common.TestBase;
 import framework.pageobject.baidu.IndexPage;
 import framework.pageobject.baidu.SearchResultPage;
-import inherited.Base;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.support.PageFactory;
 
-public class BaiduTest extends Base {
+import static org.junit.Assert.assertEquals;
+
+public class BaiduTest extends TestBase {
 
     private IndexPage indexPage;
     private SearchResultPage searchResultPage;
 
     @Before
     public void setUp() throws Exception {
-        driver.get("http://www.baidu.com");
         log.info("初始化页面对象");
         indexPage = PageFactory.initElements(driver, IndexPage.class);
         searchResultPage = PageFactory.initElements(driver, SearchResultPage.class);
     }
 
     @Test
-    public void name() {
+    public void search_result_should_has_specific_title() {
+        indexPage.open();
         indexPage.search("香港");
-        for (int i = 0; i < 30; i++) {
-            searchResultPage.nextPage();
-        }
+        assertEquals("香港_百度搜索", searchResultPage.title());
+    }
+
+    @Test
+    public void openOtherPage() {
+        search_result_should_has_specific_title();
+        searchResultPage.openLinkWithText("豆瓣");
     }
 }
