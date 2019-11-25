@@ -40,7 +40,7 @@ public class WebUtil {
     }
 
     private static WebDriver ie() {
-        System.setProperty("webdriver.ie.driver", "");
+        System.setProperty("webdriver.ie.driver", "C:/IEDriverServer.exe");
         return new InternetExplorerDriver();
     }
 
