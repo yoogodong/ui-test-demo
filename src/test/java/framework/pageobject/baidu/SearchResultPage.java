@@ -22,7 +22,7 @@ public class SearchResultPage extends PageBase {
      */
     public void nextPage() {
         log.info("点击下一页");
-        nextPage.click();
+        new Actions(driver).moveToElement(nextPage).click().perform();
         driver.navigate().refresh();
 
     }
